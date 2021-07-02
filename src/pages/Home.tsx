@@ -37,14 +37,23 @@ export function Home() {
       return;
     }
 
+    if (roomRef.val().endedAt) {
+      alert('Room already closed');
+      return;
+    }
+
     history.push(`/rooms/${roomCode}`);
+  }
+
+  function handleGoToRoomList() {
+    return history.push(`roomlist`)
   }
 
   return (
     <div id="page-auth">
       <aside>
         <img src ={illustrationImg} alt="Ilustração simbolizando perguntas e respostas" />
-        <strong>Crie salas de FQA</strong>
+        <strong>Crie salas de FAQ</strong>
         <p>Tire as suas dúvidas agora</p>
       </aside>
       <main>
@@ -56,6 +65,7 @@ export function Home() {
           </button>
           <div className="separator">ou entre em uma sala</div>
             <form onSubmit={handleJoinRoom}>
+            <div className='input-button-div'>
               <input 
                 type="text" 
                 placeholder="Digite o código da sala"
@@ -63,6 +73,8 @@ export function Home() {
                 value={roomCode} 
               />
               <Button type="submit">Entrar na sala</Button>
+              </div>
+              <Button onClick={handleGoToRoomList}>Lista de salas</Button>
             </form>
         </div>
       </main>
